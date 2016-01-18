@@ -86,11 +86,28 @@ var processUser = function(id, callback){
 		}
 
 		requestDocebo('user/userCourses', {'id_user':id}, function(courses) {
-			courses = courses.courses;
-			//console.log(toSendToAutopilot);
+			//console.log(courses);
+			//courses = courses.courses;
+			/*Course-Id
+			Course name
+			Course progress
+			Date enroll
+			Date complete
+			Final score
+			*/
+			var fieldMapping = {"course_id":"id", "course_name":"name", "course_progress" : "progress", "date_enroll":"enroll--date","date_complete":"complete--date","final_score":"final--score"};
+			for (var i=1;i<100;i++) {
+				if (!(courses["" + i] && courses["" + i].course_info)) break;
+				var course = courses["" + i].course_info;
+				var prefix = "string--Course-" + (i)+"--";
+				for (var key in fieldMapping) {
+					toSendToAutopilot.custom[prefix + fieldMapping[key]] = "" + course[key];
+				}
+			}
+			console.log(toSendToAutopilot);
 			autopilot.contacts.upsert(toSendToAutopilot)
 			.then(function (response) {
-				console.log(response);
+				//console.log(response);
 				callback();
 			})
 		})
@@ -114,7 +131,7 @@ var processUser = function(id, callback){
 		if (usersList.users.length ==0) return;
 		var smallCB = function(idx){
 			if (idx >= usersList.users.length) return;
-			if (idx == 1) return;
+			//if (idx == 1) return;
 			console.log(usersList.users[idx]);
 			processUser(usersList.users[idx].id_user, function(){
 				smallCB(idx + 1);
