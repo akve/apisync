@@ -1,0 +1,4 @@
+01 04 * * * /home/isdmblog/apisync/apisync/run.sh
+06 04 * * * /home/isdmblog/apisync/apisync/run.sh
+12 04 * * * /home/isdmblog/apisync/apisync/run.sh
+18 04 * * * /home/isdmblog/apisync/apisync/run.sh

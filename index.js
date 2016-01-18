@@ -105,7 +105,7 @@ var processUser = function(id, callback){
 				}
 			}
 			if (toSendToAutopilot.Email) {
-			console.log(toSendToAutopilot);
+			console.log(new Date(), toSendToAutopilot);
 			autopilot.contacts.upsert(toSendToAutopilot)
 			.then(function (response) {
 				//console.log(response);
