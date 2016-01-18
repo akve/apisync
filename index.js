@@ -104,13 +104,17 @@ var processUser = function(id, callback){
 					toSendToAutopilot.custom[prefix + fieldMapping[key]] = "" + course[key];
 				}
 			}
+			if (toSendToAutopilot.Email) {
 			console.log(toSendToAutopilot);
 			autopilot.contacts.upsert(toSendToAutopilot)
 			.then(function (response) {
 				//console.log(response);
 				callback();
 			})
-		})
+			} else {
+				callback();
+			}
+ 		})
 
 
 
