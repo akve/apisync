@@ -197,7 +197,7 @@ var processUser = function(id, callback){
 				smallCB(idx + 1);
 				return;
 			}*/
-			console.log(usersList.users[idx]);
+			console.log("" + idx + " out of " + usersList.users.length, usersList.users[idx]);
 			processUser(usersList.users[idx].id_user, function(){
 				smallCB(idx + 1);
 			})
